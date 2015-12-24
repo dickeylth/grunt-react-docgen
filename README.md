@@ -1,6 +1,6 @@
 # grunt-react-docgen
 
-> Grunt plugin based on react-docgen and doctrine for react component doc json generate.
+> Grunt plugin based on [react-docgen](https://github.com/reactjs/react-docgen) and [doctrine](https://github.com/eslint/doctrine) for react component doc json generate.
 
 ## 快速上手
 
@@ -36,45 +36,52 @@ grunt.initConfig({
 ### Options
 
 #### options.entryFiles
-Type: `Array`
-Default value: `['index.jsx']`
+
+- Type: `Array`
+- Default value: `['index.jsx']`
 
 需要生成自动化文档的入口文件列表。
 
 #### options.pkgInfo
-Type: `Object`
-Default value: `require(path.join(process.cwd(), 'package.json'))`
+
+- Type: `Object`
+- Default value: `require(path.join(process.cwd(), 'package.json'))`
 
 组件基本信息，默认取 `package.json`。
 
 #### options.demoEntryJSX
-Type: `String`
-Default value: `'demo/index.jsx'`
+
+- Type: `String`
+- Default value: `'demo/index.jsx'`
 
 组件 Demo 入口的 JSX 代码文件。
 
 #### options.demoEntryHTML
-Type: `String`
-Default value: `'demo/index.html'`
+
+- Type: `String`
+- Default value: `'demo/index.html'`
 
 组件 Demo 入口的 HTML 代码文件。
 
 #### options.demoBuild
-Type: `String`
-Default value: `'demo.js'`
+
+- Type: `String`
+- Default value: `'demo.js'`
 
 组件 Demo 使用的构建最终的 js 文件。
 
 
 #### options.demoContentSelector
-Type: `String`
-Default value: `'#J_Page'`
+
+- Type: `String`
+- Default value: `'#J_Page'`
 
 组件 Demo 入口的 HTML 中示例所在的 DOM 节点。
 
 #### options.outputFilePath
-Type: `String`
-Default value: `'build/doc.html'`
+
+- Type: `String`
+- Default value: `'build/doc.html'`
 
 输出文档 HTML 文件路径。
 
