@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>${name} Demo</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta content="false" name="twcClient" id="twcClient"/>
+  <link rel="stylesheet" href="//h5.m.taobao.com/css/trip/libs/prism.css">
+  <style>
+    body, html {
+      height: 100%;
+      color: rgba(0,0,0,.87);
+      background: #fff;
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      min-height: 100%;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    button, html, input, md-bottom-sheet .md-subheader, select, textarea {
+      font-family: Roboto,"Helvetica Neue",sans-serif;
+    }
+    .page-content {
+      padding: 0.5rem;
+    }
+    .name {
+      font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
+    }
+    .demo-wrapper {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      border-style: dashed;
+    }
+    .demo-show {
+      padding: 0.5rem;
+    }
+    .demo-code {
+      font-size: 75%;
+    }
+    .demo-code code {
+      word-break: break-word;
+    }
+    .demo-code pre {
+      margin: 0;
+    }
+    .demo-code .token.comment {
+      display: block;
+    }
+    .toggle-source {
+      text-align: right;
+      position: relative;
+    }
+    .toggle-source-btn {
+      display: inline-block;
+      border: 0;
+      background: #0072DB;
+      color: #fff;
+      opacity: 0.8;
+      outline: 0;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+    .toggle-source-btn svg {
+      vertical-align: middle;
+      transition: transform 0.2s ease-in-out;
+      -webkit-transition: transform 0.2s ease-in-out;
+    }
+    .toggle-source-btn svg.up {
+      transform: rotate(-180deg);
+    }
+    .subtitle {
+      color: #5F9EA0;
+      border-bottom: 1px solid #aaa;
+      padding: 0.4rem 0;
+      margin: 0.8rem 0 1.2rem;
+    }
+    .demo-header svg {
+      vertical-align: top;
+    }
+    .demo-header .description, .demo-header .author {
+      margin: 0.5rem 0;
+      font-size: 14px;
+      line-height: 16px;
+      color: #07A;
+    }
+    .api-class-detail {
+      padding-left: 0.8rem;
+    }
+    .api-class-detail code {
+      padding: 2px 4px;
+      font-size: 90%;
+      color: #c7254e;
+      white-space: nowrap;
+      background-color: #f9f2f4;
+      border-radius: 4px;
+    }
+    .api-class-extend {
+      font-size: 14px;
+      line-height: 16px;
+    }
+    .api-class-extend code {
+      font-size: 14px;
+      line-height: 16px;
+    }
+    .api-class-desc, .api-prop-desc {
+      font-size: 12px;
+      color: #777;
+    }
+    .api-props-title {
+    }
+    .api-detail h4{
+      margin: 1rem 0;
+    }
+    .api-detail h5 {
+      margin: 0.8rem 0;
+    }
+    .api-detail h6, .api-detail p {
+      margin: 0.4rem 0;
+    }
+    .api-detail p {
+      border-left: 2px solid #ccc;
+      padding-left: 4px;
+    }
+    .api-prop-type, .api-proc-func-param-type {
+      color: #fff;
+      display: inline-block;
+      border-radius: 3px;
+      background-color: gray;
+      font-size: 0.7em;
+      padding: 2px 4px;
+      line-height: 1.2em;
+      font-weight: 500;
+      margin-left: 0.2rem;
+    }
+
+    .api-prop-type.static {
+      display: inline-block;
+      border-radius: 3px;
+      background-color: #779c34 !important;
+      color: #fff;
+      font-size: 0.7em;
+      padding: 2px 4px;
+      margin-right: 8px;
+    }
+    .api-prop-type.number {
+      background-color: gray!important;
+    }
+    .api-prop-type.string {
+      background-color: gray!important;
+    }
+    .api-prop-type.object {
+      background-color: #2a6496 !important;
+    }
+    .api-prop-type.array {
+      background-color: #2a6496 !important;
+    }
+    .api-prop-type.boolean, .api-prop-type.bool {
+      background-color: #ee7d7d !important;
+    }
+    .api-prop-func-desc dl {
+      margin: 0.5rem 0;
+      font-size: 12px;
+      line-height: 14px;
+    }
+    .api-prop-func-desc dl dd, .api-prop-func-desc dl ul {
+      margin-left: 1rem;
+      padding-left: 0;
+    }
+    .api-prop-func-desc dt {
+      margin: 0.5rem 0;
+    }
+    .api-label {
+      font-family: RobotoDraft,Roboto,'Helvetica Neue',sans-serif;
+      color: #2E8B57;
+      font-weight:bold;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<!--动画转场包装器-->
+<div data-role="page">
+  <div id="tbh5v0" class="content">
+    <div id="bodyCont" class="screen-wrap fullscreen">
+      <div class="page-content" id="J_Page">
+
+        <section class="demo-header">
+          <h2 class="name">${name}</h2>
+          <p class="description">
+            <svg fill="#29b6f6" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+            </svg>
+            ${description}
+          </p>
+          <p class="author">
+            <svg fill="#29b6f6" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+            ${author}
+          </label>
+        </section>
+
+        <section class="demo-container">
+          <h3 class="subtitle">代码演示</h3>
+          <div class="demo-wrapper">
+            <div class="demo-show">
+              $${demoContent}
+            </div>
+            <div class="toggle-source">
+              <button class="toggle-source-btn" id="J_ToggleSourceBtn">
+                <svg fill="#ffffff" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+                查看源码
+              </button>
+            </div>
+            <section class="demo-code hidden" id="J_DemoCode">
+              <pre>
+                <code class="language-jsx">$${sourceCode}</code>
+              </pre>
+            </section>
+          </div>
+
+        </section>
+
+        <section class="demo-api">
+          <h3 class="subtitle">API</h3>
+          <div class="api-detail">
+            {@each apiDetailArr as apiDetailItem}
+            <section class="api-detail-item">
+              <h4 class="api-class-name">${apiDetailItem.name}</h4>
+              <div class="api-class-detail">
+                {@if apiDetailItem.extend}
+                <h5 class="api-class-extend">
+                  <label class="api-label">Extends:</label>
+                <code>${apiDetailItem.extend}</code></h5>
+                {@/if}
+                <p class="api-class-desc">${apiDetailItem.desc}</p>
+
+                <h5 class="api-props-title api-label">Props: </h5>
+                <ul class="api-props-list">
+                  {@each apiDetailItem.props as apiPropItem}
+                  <li class="api-prop-item">
+                    <div class="api-prop-info">
+                      <h6 class="api-prop-name">
+                        ${apiPropItem.name}
+                        <label class="api-prop-type ${apiPropItem.type.name}">${apiPropItem.type.name}</label>
+                        {@if apiPropItem.required}<label class="api-prop-required">required</label>{@/if}
+                      </h6>
+                    </div>
+                    <p class="api-prop-desc">
+                      ${apiPropItem.docBlock.description}
+                      {@if apiPropItem.type.name == 'func'}
+                      <div class="api-prop-func-desc">
+                        <dl>
+                          <dt><label class="api-label">Params:</label></dt>
+                          <dd>
+                            <ul>
+                              {@each apiPropItem.docBlock.tags as tagItem}
+                              <li>
+                                {@if tagItem.title == 'param'}
+                                <code class="api-prop-func-param">${tagItem.name}</code>
+                                <label class="api-prop-func-param-type api-prop-type ${tagItem.type.name|lowercase}">${tagItem.type.name}</label>
+                                <p class="api-prop-desc api-prop-func-param-desc ">
+                                  ${tagItem.description}
+                                </p>
+                                {@/if}
+                              </li>
+                              {@/each}
+                            </ul>
+                          </dd>
+                        </dl>
+                      </div>
+                      {@/if}
+                    </p>
+                  </li>
+                  {@/each}
+                </ul>
+              </div>
+            </section>
+            {@/each}
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="//g.alicdn.com/sj/lib/zepto/zepto.min.js"></script>
+<script src="//h5.m.taobao.com/js/trip/libs/prism.js" data-manual></script>
+<script src="${demoBuild}"></script>
+<script type="text/json" id="J_ApiMeta">$${apiDetailArr|json}</script>
+<script>
+Prism.highlightAll();
+$('#J_ToggleSourceBtn').on('click', function () {
+  $(this).find('svg').toggleClass('up');
+  $('#J_DemoCode').toggleClass('hidden');
+});
+</script>
+</body>
+</html>
