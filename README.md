@@ -88,7 +88,9 @@ grunt.initConfig({
 ## 版本历史
 
 - [0.1.0]
-    - 初始记录
+  - 初始记录
+- [0.1.1]
+  - 加上版本号 & tnpm version
 
 ## License
 Copyright (c) 2015 dickeylth. Licensed under the MIT license.

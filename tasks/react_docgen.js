@@ -155,7 +155,7 @@ module.exports = function (grunt) {
       demoEntryJSX: 'demo/index.jsx',
       demoEntryHTML: 'demo/index.html',
       demoBuild: 'demo.js',
-      outputFilePath: 'build/doc.html',
+      outputFilePath: 'build/index.html',
       demoContentSelector: '#J_Page'
     });
 
@@ -198,6 +198,7 @@ module.exports = function (grunt) {
     grunt.file.write(options.outputFilePath, Juicer(DOC_TPL_SOURCE, {
       name: pkgInfo.name,
       description: pkgInfo.description,
+      version: pkgInfo.version,
       author: Array.isArray(pkgInfo.author) ? pkgInfo.author.join('|') : pkgInfo.author,
       demoBuild: options.demoBuild,
       demoContent: extractHTMLBySelector(options.demoEntryHTML, options.demoContentSelector),
