@@ -168,6 +168,10 @@ module.exports = function (grunt) {
         grunt.log.warn('Source file "' + filepath + '" not found.');
       } else {
         var src = grunt.file.read(filepath);
+        if (src.indexOf('"react"') == -1) {
+          // hack for indirect react import, so that react-docgen could recognize it as react module.
+          src = ';import React from "react";' + src;
+        }
         var parsed = reactDocgen.parse(src);
 
         // replace the component`description` string with a parsed doc block object

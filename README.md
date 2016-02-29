@@ -91,6 +91,8 @@ grunt.initConfig({
   - 初始记录
 - [0.1.1]
   - 加上版本号 & tnpm version
+- [0.1.2]
+  - hack for import React from 'base' instead of from 'react' directly.
 
 ## License
 Copyright (c) 2015 dickeylth. Licensed under the MIT license.
