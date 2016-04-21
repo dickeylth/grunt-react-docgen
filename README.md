@@ -93,9 +93,8 @@ grunt.initConfig({
   - 加上版本号 & tnpm version
 - [0.1.2]
   - hack for import React from 'base' instead of from 'react' directly.
-- [0.1.3]
-  - fix for `author` field.
-
+- [0.1.3][0.1.4]
+  - fix & compatible for `author` field.
 
 ## License
 Copyright (c) 2015 dickeylth. Licensed under the MIT license.
