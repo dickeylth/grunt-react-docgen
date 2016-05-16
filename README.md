@@ -95,6 +95,9 @@ grunt.initConfig({
   - hack for import React from 'base' instead of from 'react' directly.
 - [0.1.3][0.1.4]
   - fix & compatible for `author` field.
+- [0.1.5]
+  - add `flexible.js` to doc.html
+  
 
 ## License
 Copyright (c) 2015 dickeylth. Licensed under the MIT license.
