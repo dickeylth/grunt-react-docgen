@@ -56,27 +56,12 @@ grunt.initConfig({
 
 组件 Demo 入口的 JSX 代码文件。
 
-#### options.demoEntryHTML
+#### options.demoUrl
 
 - Type: `String`
-- Default value: `'demo/index.html'`
+- Default value: `'../demo/index.html'`
 
-组件 Demo 入口的 HTML 代码文件。
-
-#### options.demoBuild
-
-- Type: `String`
-- Default value: `'demo.js'`
-
-组件 Demo 使用的构建最终的 js 文件。
-
-
-#### options.demoContentSelector
-
-- Type: `String`
-- Default value: `'#J_Page'`
-
-组件 Demo 入口的 HTML 中示例所在的 DOM 节点。
+组件 Demo 入口 url。
 
 #### options.outputFilePath
 

@@ -146,7 +146,6 @@ module.exports = function (grunt) {
       entryFiles: ['index.jsx'],
       pkgInfo: require(path.join(process.cwd(), 'package.json')),
       demoEntryJSX: 'demo/index.jsx',
-      demoEntryHTML: 'demo/index.html',
       demoBuild: 'demo.js',
       outputFilePath: 'build/index.html',
       demoUrl: '../demo/index.html'
