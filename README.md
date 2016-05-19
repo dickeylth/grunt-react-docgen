@@ -97,6 +97,8 @@ grunt.initConfig({
   - fix & compatible for `author` field.
 - [0.1.5]
   - add `flexible.js` to doc.html
+- [0.2.0]
+  - 从抓取 demo 内容改为指定 demo 路径通过 iframe 访问
   
 
 ## License

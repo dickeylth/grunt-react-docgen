@@ -9,10 +9,6 @@
   <meta name="format-detection" content="telephone=no"/>
   <meta content="false" name="twcClient" id="twcClient"/>
   <link rel="stylesheet" href="//h5.m.taobao.com/css/trip/libs/prism.css">
-  <script>
-    /*! flexible 2016-01-14 11:47:14 */
-    !function(a){function b(){var b=d.clientWidth,c="}";!navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)&&b>1024&&(b=640,c=";max-width:"+b+"px;margin-right:auto!important;margin-left:auto!important;}"),a.rem=b/10,/ZTE U930_TD/.test(navigator.userAgent)&&(a.rem=1.13*a.rem),e.innerHTML="html{font-size:"+a.rem+"px!important;}body{font-size:"+12*(b/320)+"px"+c}var c,d=document.documentElement,e=(document.querySelector('meta[name="viewport"]'),document.createElement("style")),f=1;f=1,c=1/f,d.firstElementChild.appendChild(e),d.setAttribute("data-dpr",f),a.dpr=f,a.addEventListener("resize",function(){b()},!1),a.addEventListener("pageshow",function(a){a.persisted&&b()},!1),b()}(window);
-  </script>
   <style>
     body, html {
       height: 100%;
@@ -32,6 +28,7 @@
     }
     .page-content {
       padding: 0.5rem;
+      padding-right: 400px;
     }
     .name {
       font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
@@ -42,7 +39,7 @@
       border-style: dashed;
     }
     .demo-show {
-      padding: 0.5rem;
+      /*padding: 0.5rem;*/
     }
     .demo-code {
       font-size: 75%;
@@ -55,20 +52,6 @@
     }
     .demo-code .token.comment {
       display: block;
-    }
-    .toggle-source {
-      text-align: right;
-      position: relative;
-    }
-    .toggle-source-btn {
-      display: inline-block;
-      border: 0;
-      background: #0072DB;
-      color: #fff;
-      opacity: 0.8;
-      outline: 0;
-      -webkit-appearance: none;
-      cursor: pointer;
     }
     .toggle-source-btn svg {
       vertical-align: middle;
@@ -184,8 +167,94 @@
       color: #2E8B57;
       font-weight:bold;
     }
-    .hidden {
-      display: none;
+    .device {
+      z-index: 1000;
+      border-radius: 30px;
+      position: absolute;
+      right: 1%;
+      /*margin-left: -240px;*/
+      top: 0;
+      margin-top: -10px;
+      border: 3px solid #fff;
+      border-width: 2px 0 0 2px;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+      padding: 80px 20px;
+      background: #f2f2f2;
+      /* Old browsers */
+      background: -moz-linear-gradient(-45deg, #f2f2f2 0%, #e3e3e3 51%, #ffffff 100%);
+      /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #f2f2f2), color-stop(51%, #e3e3e3), color-stop(100%, #ffffff));
+      /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(-45deg, #f2f2f2 0%, #e3e3e3 51%, #ffffff 100%);
+      /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(-45deg, #f2f2f2 0%, #e3e3e3 51%, #ffffff 100%);
+      /* Opera 11.10+ */
+      background: -ms-linear-gradient(-45deg, #f2f2f2 0%, #e3e3e3 51%, #ffffff 100%);
+      /* IE10+ */
+      background: linear-gradient(135deg, #f2f2f2 0%, #e3e3e3 51%, #ffffff 100%);
+      /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#ffffff', GradientType=1);
+      /* IE6-9 fallback on horizontal gradient */
+    }
+    .device .home {
+      position: absolute;
+      bottom: 15px;
+      width: 50px;
+      height: 50px;
+      border-radius: 25px;
+      border: 1px solid #e3e3e3;
+      border-width: 1px 0 0 1px;
+      background: #fff;
+      left: 50%;
+      margin-left: -25px;
+    }
+    .device .home .home-inner {
+      position: absolute;
+      border-radius: 3px;
+      border: 3px solid #e3e3e3;
+      width: 20px;
+      height: 20px;
+      top: 50%;
+      left: 50%;
+      margin: -10px 0 0 -10px;
+      box-sizing: border-box;
+    }
+    .device.vertical .home {
+      right: 15px;
+      top: 50%;
+      bottom: auto;
+      left: auto;
+      margin: -25px 0 0 -25px;
+    }
+    .device.vertical .camera {
+      left: 40px;
+      top: 50%;
+      margin: -5px 0 0 0;
+    }
+    .device .camera {
+      position: absolute;
+      background: #000;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      left: 50%;
+      margin: 0 0 0 -5px;
+      top: 40px;
+    }
+    .device-inner {
+      width: 480px;
+      height: 640px;
+      border: 1px solid #ccc;
+      background: #666;
+      border-radius: 5px;
+      position: relative;
+      z-index: 1;
+    }
+    .device-inner iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
     }
   </style>
 </head>
@@ -201,13 +270,13 @@
           <p class="description">
             <img src="http://web.npm.alibaba-inc.com/badge/v/${name}.svg?style=flat-square"/>
           </p>
-          <p class="description">
-            <svg fill="#29b6f6" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 0h24v24H0z" fill="none"/>
-              <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/>
-            </svg>
-            ${version}
-          </p>
+          <!--<p class="description">-->
+            <!--<svg fill="#29b6f6" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">-->
+              <!--<path d="M0 0h24v24H0z" fill="none"/>-->
+              <!--<path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/>-->
+            <!--</svg>-->
+            <!--${version}-->
+          <!--</p>-->
           <p class="description">
             <svg fill="#29b6f6" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 0h24v24H0z" fill="none"/>
@@ -229,21 +298,20 @@
         </section>
 
         <section class="demo-container">
-          <h3 class="subtitle">代码演示</h3>
+          <h3 class="subtitle">示例代码</h3>
           <div class="demo-wrapper">
             <div class="demo-show">
-              $${demoContent}
+              <div class="device">
+                <div class="camera"></div>
+                <div class="device-inner" style="width: 320px; height: 568px;">
+                  <iframe frameborder="no" scrolling="yes" seamless src="${demoUrl}"></iframe>
+                </div>
+                <div class="home">
+                  <span class="home-inner"></span>
+                </div>
+              </div>
             </div>
-            <div class="toggle-source">
-              <button class="toggle-source-btn" id="J_ToggleSourceBtn">
-                <svg fill="#ffffff" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                </svg>
-                查看源码
-              </button>
-            </div>
-            <section class="demo-code hidden" id="J_DemoCode">
+            <section class="demo-code">
               <pre>
                 <code class="language-jsx">$${sourceCode}</code>
               </pre>
@@ -317,14 +385,9 @@
 </div>
 <script src="//g.alicdn.com/sj/lib/zepto/zepto.min.js"></script>
 <script src="//h5.m.taobao.com/js/trip/libs/prism.js" data-manual></script>
-<script src="${demoBuild}"></script>
 <script type="text/json" id="J_ApiMeta">$${apiDetailArr|json}</script>
 <script>
 Prism.highlightAll();
-$('#J_ToggleSourceBtn').on('click', function () {
-  $(this).find('svg').toggleClass('up');
-  $('#J_DemoCode').toggleClass('hidden');
-});
 </script>
 </body>
 </html>

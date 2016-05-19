@@ -10,7 +10,6 @@
 var reactDocgen = require('react-docgen');
 var doctrine = require('doctrine');
 var Juicer = require('juicer');
-var cheerio = require('cheerio');
 var _ = require('lodash')
 var fs = require('fs');
 var path = require('path');
@@ -29,12 +28,6 @@ function genCodeSource(filePath) {
 
 function parseDocBlock(docBlock) {
     return doctrine.parse(docBlock || '', {unwrap: true});
-}
-
-function extractHTMLBySelector(htmlPath, selector) {
-  var htmlSource = fs.readFileSync(htmlPath, 'utf-8');
-  var $ = cheerio.load(htmlSource);
-  return $(selector).html();
 }
 
 /**
@@ -156,7 +149,7 @@ module.exports = function (grunt) {
       demoEntryHTML: 'demo/index.html',
       demoBuild: 'demo.js',
       outputFilePath: 'build/index.html',
-      demoContentSelector: '#J_Page'
+      demoUrl: '../demo/index.html'
     });
 
     var fileDocMetaArr = [];
@@ -205,9 +198,9 @@ module.exports = function (grunt) {
       version: pkgInfo.version,
       author: Array.isArray(pkgInfo.author) ? pkgInfo.author.join('|') : pkgInfo.author,
       demoBuild: options.demoBuild,
-      demoContent: extractHTMLBySelector(options.demoEntryHTML, options.demoContentSelector),
       sourceCode: genCodeSource(options.demoEntryJSX),
-      apiDetailArr: reFormatFileDocMetaArr(fileDocMetaArr)
+      apiDetailArr: reFormatFileDocMetaArr(fileDocMetaArr),
+      demoUrl: options.demoUrl
     }));
 
     // Print a success message.
