@@ -80,7 +80,7 @@
       margin-top: 1em;
       margin-bottom: 16px;
       font-weight: 400;
-      font-size: 1.25em;
+      font-size: 1.1rem;
       line-height: 1.4;
       color: rgba(0,0,0,.87);
     }
@@ -178,6 +178,9 @@
       margin-left: 4px;
       font-size: 80%;
       vertical-align: text-top;
+    }
+    .api-error-tip {
+      color: #c7254e;
     }
     .api-prop-enum-list {
       margin: 0.2rem;
@@ -380,47 +383,51 @@
                       {@if apiPropItem.required}<label class="api-prop-required">required</label>{@/if}
                     </td>
                     <td class="api-prop-type">
-                      ${apiPropItem.type.name}
-                      {@if apiPropItem.type.value && apiPropItem.type.value.name}
-                      :
-                      <ul class="api-prop-enum-list">
-                        <li>${apiPropItem.type.value.name}</li>
-                      </ul>
-                      {@/if}
-                      {@if apiPropItem.type.raw}
-                      :
-                      <ul class="api-prop-enum-list">
-                        <li>${apiPropItem.type.raw}</li>
-                      </ul>
-                      {@/if}
-                      {@if apiPropItem.type.name === 'enum' && apiPropItem.type.value.length > 0}
+                      {@if apiPropItem.type && apiPropItem.type.name}
+                        ${apiPropItem.type.name}
+                        {@if apiPropItem.type.value && apiPropItem.type.value.name}
+                        :
+                        <ul class="api-prop-enum-list">
+                          <li>${apiPropItem.type.value.name}</li>
+                        </ul>
+                        {@/if}
+                        {@if apiPropItem.type.raw}
+                        :
+                        <ul class="api-prop-enum-list">
+                          <li>${apiPropItem.type.raw}</li>
+                        </ul>
+                        {@/if}
+                        {@if apiPropItem.type.name === 'enum' && apiPropItem.type.value.length > 0}
                         :
                         <ul class="api-prop-enum-list">
                           {@each apiPropItem.type.value as enumItem}
                           <li>${enumItem.value}</li>
                           {@/each}
                         </ul>
-                      {@/if}
-                      {@if apiPropItem.type.name === 'union' && apiPropItem.type.value.length > 0}
-                      :
-                      <ul class="api-prop-enum-list">
-                        {@each apiPropItem.type.value as enumItem}
-                        <li>
-                          ${enumItem.name}{@if enumItem.value} ${enumItem.value}{@/if}
-                        </li>
-                        {@/each}
-                      </ul>
-                      {@/if}
-                      {@if apiPropItem.type.name === 'shape' && Object.keys(apiPropItem.type.value).length > 0}
-                      :
-                      <ul class="api-prop-enum-list">
-                        {@each Object.keys(apiPropItem.type.value) as shapeKey}
-                        <li>
-                          ${shapeKey}: ${apiPropItem.type.value[shapeKey].name}
-                          {@if apiPropItem.type.value[shapeKey].name.required}<label class="api-prop-required">required</label>{@/if}
-                        </li>
-                        {@/each}
-                      </ul>
+                        {@/if}
+                        {@if apiPropItem.type.name === 'union' && apiPropItem.type.value.length > 0}
+                        :
+                        <ul class="api-prop-enum-list">
+                          {@each apiPropItem.type.value as enumItem}
+                          <li>
+                            ${enumItem.name}{@if enumItem.value} ${enumItem.value}{@/if}
+                          </li>
+                          {@/each}
+                        </ul>
+                        {@/if}
+                        {@if apiPropItem.type.name === 'shape' && Object.keys(apiPropItem.type.value).length > 0}
+                        :
+                        <ul class="api-prop-enum-list">
+                          {@each Object.keys(apiPropItem.type.value) as shapeKey}
+                          <li>
+                            ${shapeKey}: ${apiPropItem.type.value[shapeKey].name}
+                            {@if apiPropItem.type.value[shapeKey].name.required}<label class="api-prop-required">required</label>{@/if}
+                          </li>
+                          {@/each}
+                        </ul>
+                        {@/if}
+                      {@else}
+                        <label class="api-error-tip">${apiPropItem | missingPropTypeTip, apiDetailItem}</label>
                       {@/if}
                     </td>
                     <td class="api-prop-default">
@@ -430,7 +437,7 @@
                     </td>
                     <td class="api-prop-desc">
                       ${apiPropItem.docBlock.description}
-                      {@if apiPropItem.type.name == 'func'}
+                      {@if apiPropItem.type && apiPropItem.type.name == 'func'}
                       <div class="api-prop-func-desc">
                         <dl>
                           <dt><label class="api-label">函数签名:</label></dt>

@@ -209,6 +209,10 @@ module.exports = function (grunt) {
         return 'void';
       }
     });
+    Juicer.register('missingPropTypeTip', function (propItem, apiDetailItem) {
+      grunt.log.error(apiDetailItem.name + '.' + propItem.name + ' 没有在 propTypes 中声明属性类型!');
+      return 'missing';
+    });
 
     grunt.verbose.writeln(JSON.stringify(fileDocMetaArr, null, 2));
 
