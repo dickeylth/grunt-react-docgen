@@ -191,6 +191,27 @@ module.exports = function (grunt) {
     Juicer.register('lowercase', function (str) {
       return str.toLowerCase();
     });
+    Juicer.register('funcParams', function (tags) {
+      var paramTags = tags.filter(function (tagItem) {
+        return tagItem.title === 'param';
+      });
+      return paramTags.map(function (paramTag) {
+        return paramTag.name + ': ' + paramTag.type.name
+      }).join(', ');
+    });
+    Juicer.register('funcReturn', function (tags) {
+      var returnTag = tags.filter(function (tagItem) {
+        return tagItem.title === 'return';
+      })[0];
+      if (returnTag) {
+        return returnTag.type.name;
+      } else {
+        return 'void';
+      }
+    });
+
+    grunt.verbose.writeln(JSON.stringify(fileDocMetaArr, null, 2));
+
     grunt.file.write(options.outputFilePath, Juicer(DOC_TPL_SOURCE, {
       name: pkgInfo.name,
       description: pkgInfo.description,

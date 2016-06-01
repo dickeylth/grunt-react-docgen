@@ -76,6 +76,17 @@
       line-height: 16px;
       color: #07A;
     }
+    .api-class-name {
+      margin-top: 1em;
+      margin-bottom: 16px;
+      font-weight: 400;
+      font-size: 1.25em;
+      line-height: 1.4;
+      color: rgba(0,0,0,.87);
+    }
+    .api-class-name a {
+      text-decoration: none;
+    }
     .api-class-detail {
       padding-left: 0.8rem;
     }
@@ -95,12 +106,6 @@
       font-size: 14px;
       line-height: 16px;
     }
-    .api-class-desc, .api-prop-desc {
-      font-size: 12px;
-      color: #777;
-    }
-    .api-props-title {
-    }
     .api-detail h4{
       margin: 1rem 0;
     }
@@ -114,41 +119,70 @@
       border-left: 2px solid #ccc;
       padding-left: 4px;
     }
-    .api-prop-type, .api-proc-func-param-type {
+    .api-detail table {
+      border-collapse: collapse;
+      display: block;
+      width: 100%;
+      word-break: normal;
+      word-break: keep-all;
+      table-layout: fixed;
+    }
+    .api-detail table td, .api-detail table th {
+      padding: 6px 13px;
+      border: 1px solid #ddd;
+      border-top: 1px solid rgba(0,0,0,.06);
+      display: table-cell;
+      vertical-align: top;
+      border-left: 0 none;
+      border-right: 0 none;
+    }
+    .api-detail table tr {
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+    .api-detail table td {
+      color: #266d90;
+      font-size: 95%;
+    }
+    .api-detail table th {
+      border-bottom: 2px solid rgba(0,0,0,.06);
+      border-top: 0 none;
+      color: #888;
+      display: table-cell;
+      font-weight: 400;
+      text-align: left;
+    }
+    td.api-prop-name {
+      color: #266d90;
+    }
+    td.api-prop-type {
+      color: #bf2a5c;
+      font-family: Menlo,Monaco,Consolas,Courier New,monospace;
+      font-size: 90%;
+    }
+    td.api-prop-default {
+      color: #666;
+      font-family: Menlo,Monaco,Consolas,Courier New,monospace;
+    }
+    td.api-prop-desc {
+      color: rgba(51,51,51,.9);
+      font-family: Roboto,sans-serif;
+      font-size: 95%;
+      min-width: 250px;
+    }
+    .api-prop-required {
+      background: #c7254e;
+      border-radius: 4px;
+      padding: 2px;
       color: #fff;
-      display: inline-block;
-      border-radius: 3px;
-      background-color: gray;
-      font-size: 0.7em;
-      padding: 2px 4px;
-      line-height: 1.2em;
-      font-weight: 500;
-      margin-left: 0.2rem;
+      margin-left: 4px;
+      font-size: 80%;
+      vertical-align: text-top;
     }
-
-    .api-prop-type.static {
-      display: inline-block;
-      border-radius: 3px;
-      background-color: #779c34 !important;
-      color: #fff;
-      font-size: 0.7em;
-      padding: 2px 4px;
-      margin-right: 8px;
-    }
-    .api-prop-type.number {
-      background-color: gray!important;
-    }
-    .api-prop-type.string {
-      background-color: gray!important;
-    }
-    .api-prop-type.object {
-      background-color: #2a6496 !important;
-    }
-    .api-prop-type.array {
-      background-color: #2a6496 !important;
-    }
-    .api-prop-type.boolean, .api-prop-type.bool {
-      background-color: #ee7d7d !important;
+    .api-prop-enum-list {
+      margin: 0.2rem;
+      font-size: 75%;
+      line-height: 1.5;
     }
     .api-prop-func-desc dl {
       margin: 0.5rem 0;
@@ -325,54 +359,105 @@
           <div class="api-detail">
             {@each apiDetailArr as apiDetailItem}
             <section class="api-detail-item">
-              <h4 class="api-class-name">${apiDetailItem.name}</h4>
+              <h4 class="api-class-name">
+                <a href="#api-${apiDetailItem.name}"># <code>&lt;${apiDetailItem.name}&gt;</code> Properties</a>
+              </h4>
               <div class="api-class-detail">
-                {@if apiDetailItem.extend}
-                <h5 class="api-class-extend">
-                  <label class="api-label">Extends:</label>
-                <code>${apiDetailItem.extend}</code></h5>
-                {@/if}
-                <p class="api-class-desc">${apiDetailItem.desc}</p>
-
-                <h5 class="api-props-title api-label">Props: </h5>
-                <ul class="api-props-list">
+                <table>
+                  <thead>
+                  <tr>
+                    <th class="api-prop-name">参数名</th>
+                    <th class="api-prop-type">类型</th>
+                    <th class="api-prop-default">默认值</th>
+                    <th class="api-prop-desc">说明</th>
+                  </tr>
+                  </thead>
+                  <tbody>
                   {@each apiDetailItem.props as apiPropItem}
-                  <li class="api-prop-item">
-                    <div class="api-prop-info">
-                      <h6 class="api-prop-name">
-                        ${apiPropItem.name}
-                        <label class="api-prop-type ${apiPropItem.type.name}">${apiPropItem.type.name}</label>
-                        {@if apiPropItem.required}<label class="api-prop-required">required</label>{@/if}
-                      </h6>
-                    </div>
-                    <p class="api-prop-desc">
+                  <tr>
+                    <td class="api-prop-name">
+                      ${apiPropItem.name}
+                      {@if apiPropItem.required}<label class="api-prop-required">required</label>{@/if}
+                    </td>
+                    <td class="api-prop-type">
+                      ${apiPropItem.type.name}
+                      {@if apiPropItem.type.value && apiPropItem.type.value.name}
+                      :
+                      <ul class="api-prop-enum-list">
+                        <li>${apiPropItem.type.value.name}</li>
+                      </ul>
+                      {@/if}
+                      {@if apiPropItem.type.raw}
+                      :
+                      <ul class="api-prop-enum-list">
+                        <li>${apiPropItem.type.raw}</li>
+                      </ul>
+                      {@/if}
+                      {@if apiPropItem.type.name === 'enum' && apiPropItem.type.value.length > 0}
+                        :
+                        <ul class="api-prop-enum-list">
+                          {@each apiPropItem.type.value as enumItem}
+                          <li>${enumItem.value}</li>
+                          {@/each}
+                        </ul>
+                      {@/if}
+                      {@if apiPropItem.type.name === 'union' && apiPropItem.type.value.length > 0}
+                      :
+                      <ul class="api-prop-enum-list">
+                        {@each apiPropItem.type.value as enumItem}
+                        <li>
+                          ${enumItem.name}{@if enumItem.value} ${enumItem.value}{@/if}
+                        </li>
+                        {@/each}
+                      </ul>
+                      {@/if}
+                      {@if apiPropItem.type.name === 'shape' && Object.keys(apiPropItem.type.value).length > 0}
+                      :
+                      <ul class="api-prop-enum-list">
+                        {@each Object.keys(apiPropItem.type.value) as shapeKey}
+                        <li>
+                          ${shapeKey}: ${apiPropItem.type.value[shapeKey].name}
+                          {@if apiPropItem.type.value[shapeKey].name.required}<label class="api-prop-required">required</label>{@/if}
+                        </li>
+                        {@/each}
+                      </ul>
+                      {@/if}
+                    </td>
+                    <td class="api-prop-default">
+                      {@if apiPropItem.defaultValue}
+                        <code>${apiPropItem.defaultValue.value}</code>
+                      {@/if}
+                    </td>
+                    <td class="api-prop-desc">
                       ${apiPropItem.docBlock.description}
                       {@if apiPropItem.type.name == 'func'}
                       <div class="api-prop-func-desc">
                         <dl>
-                          <dt><label class="api-label">Params:</label></dt>
+                          <dt><label class="api-label">函数签名:</label></dt>
                           <dd>
+                            <code>
+                              function(${apiPropItem.docBlock.tags | funcParams}) => ${apiPropItem.docBlock.tags | funcReturn}
+                            </code>
                             <ul>
                               {@each apiPropItem.docBlock.tags as tagItem}
-                              <li>
                                 {@if tagItem.title == 'param'}
-                                <code class="api-prop-func-param">${tagItem.name}</code>
-                                <label class="api-prop-func-param-type api-prop-type ${tagItem.type.name|lowercase}">${tagItem.type.name}</label>
-                                <p class="api-prop-desc api-prop-func-param-desc ">
+                                <li>
+                                  <code class="api-prop-func-param">${tagItem.name}</code>
+                                  :
                                   ${tagItem.description}
-                                </p>
+                                </li>
                                 {@/if}
-                              </li>
                               {@/each}
                             </ul>
                           </dd>
                         </dl>
                       </div>
                       {@/if}
-                    </p>
-                  </li>
+                    </td>
+                  </tr>
                   {@/each}
-                </ul>
+                  </tbody>
+                </table>
               </div>
             </section>
             {@/each}
