@@ -164,6 +164,16 @@ module.exports = function (grunt) {
           // hack for indirect react import, so that react-docgen could recognize it as react module.
           src = ';import React from "react";' + src;
         }
+
+        // add hack
+        // `react-docgen` 不识别继承自 Component 的类, hack 一下 extends 让它识别
+        // @alife/actionsheet extends @alife/pad extends Component
+        var exportRegExp = /(export.*default.*class.*extends\s*)(\w+)\s*/;
+        var result = exportRegExp.exec(src);
+        if (result && (result[2] != 'Component')) {
+          src = src.replace(exportRegExp, '$1Component');
+        }
+
         var parsed = reactDocgen.parse(src);
 
         // replace the component`description` string with a parsed doc block object
