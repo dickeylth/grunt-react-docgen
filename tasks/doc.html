@@ -45,13 +45,19 @@
       font-size: 75%;
     }
     .demo-code code {
-      word-break: break-word;
+      word-break: break-all;
+      display: block;
     }
     .demo-code pre {
       margin: 0;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex;
     }
     .demo-code .token.comment {
-      display: block;
+      display: inline-block;
     }
     .toggle-source-btn svg {
       vertical-align: middle;

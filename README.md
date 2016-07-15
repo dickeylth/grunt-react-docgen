@@ -88,6 +88,8 @@ grunt.initConfig({
   - 参考 material-ui 的 API 文档输出
 - [0.2.6]
   - Catch error for `reactDocgen.parse`
+- [0.2.7]
+  - fix doc html style
 
 ## License
 Copyright (c) 2015 dickeylth. Licensed under the MIT license.
