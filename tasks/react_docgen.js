@@ -174,23 +174,27 @@ module.exports = function (grunt) {
           src = src.replace(exportRegExp, '$1Component');
         }
 
-        var parsed = reactDocgen.parse(src);
+        try {
+          var parsed = reactDocgen.parse(src);
 
-        // replace the component`description` string with a parsed doc block object
-        parsed.docBlock = parseDocBlock(parsed.description);
+          // replace the component`description` string with a parsed doc block object
+          parsed.docBlock = parseDocBlock(parsed.description);
 
-        // replace prop `description` strings with a parsed doc block object
-        var props = [];
-        _.each(parsed.props, function(propDef, propName) {
-          props.push(_.merge(propDef, {
-            name: propName,
-            docBlock: parseDocBlock(propDef.description)
-          }));
-        });
-        parsed.props = props;
-        parsed.fileName = path.basename(filepath).split('.')[0];
+          // replace prop `description` strings with a parsed doc block object
+          var props = [];
+          _.each(parsed.props, function(propDef, propName) {
+            props.push(_.merge(propDef, {
+              name: propName,
+              docBlock: parseDocBlock(propDef.description)
+            }));
+          });
+          parsed.props = props;
+          parsed.fileName = path.basename(filepath).split('.')[0];
 
-        fileDocMetaArr.push(parsed);
+          fileDocMetaArr.push(parsed);
+        } catch (e) {
+          grunt.log.warn('Error processing <' + filepath + '>: ' + e.message);
+        }
       }
     });
 

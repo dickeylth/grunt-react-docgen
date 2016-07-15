@@ -86,6 +86,8 @@ grunt.initConfig({
   - 从抓取 demo 内容改为指定 demo 路径通过 iframe 访问
 - [0.2.1]
   - 参考 material-ui 的 API 文档输出
+- [0.2.6]
+  - Catch error for `reactDocgen.parse`
 
 ## License
 Copyright (c) 2015 dickeylth. Licensed under the MIT license.
