@@ -148,7 +148,7 @@ module.exports = function (grunt) {
       demoEntryJSX: 'demo/index.jsx',
       demoBuild: 'demo.js',
       outputFilePath: 'build/index.html',
-      demoUrl: '../demo/index.html'
+      demoUrl: 'demo/index.html'
     });
 
     var fileDocMetaArr = [];
