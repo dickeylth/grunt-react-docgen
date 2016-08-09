@@ -1,6 +1,6 @@
 {
   "name": "grunt-react-docgen",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Grunt plugin based on react-docgen and doctrine for react component doc json generate",
   "homepage": "https://github.com/dickeylth/grunt-react-docgen",
   "repository": {
