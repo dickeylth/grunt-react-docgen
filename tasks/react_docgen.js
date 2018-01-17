@@ -15,6 +15,7 @@ var fs = require('fs');
 var path = require('path');
 
 const DOC_TPL_SOURCE = fs.readFileSync(path.join(__dirname, './doc.html'), 'utf-8');
+const DOC_TPL_SOURCE_PC = fs.readFileSync(path.join(__dirname, './doc_pc.html'), 'utf-8');
 
 /**
  * 生成源码
@@ -148,7 +149,8 @@ module.exports = function (grunt) {
       demoEntryJSX: 'demo/index.jsx',
       demoBuild: 'demo.js',
       outputFilePath: 'build/index.html',
-      demoUrl: '../demo/index.html'
+      demoUrl: '../demo/index.html',
+      deviceType: 'h5' // deviceType can be 'pc' or 'h5'
     });
 
     var fileDocMetaArr = [];
@@ -230,7 +232,8 @@ module.exports = function (grunt) {
 
     grunt.verbose.writeln(JSON.stringify(fileDocMetaArr, null, 2));
 
-    grunt.file.write(options.outputFilePath, Juicer(DOC_TPL_SOURCE, {
+    var tplSource = options.deviceType === 'pc' ? DOC_TPL_SOURCE_PC : DOC_TPL_SOURCE;
+    grunt.file.write(options.outputFilePath, Juicer(tplSource, {
       name: pkgInfo.name,
       description: pkgInfo.description,
       version: pkgInfo.version,

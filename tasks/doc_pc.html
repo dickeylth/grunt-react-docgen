@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>${name} Demo</title>
+  <link rel="stylesheet" href="//h5.m.taobao.com/css/trip/libs/prism.css">
+  <style>
+    body, html {
+      height: 100%;
+      color: rgba(0,0,0,.87);
+      background: #fff;
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      min-height: 100%;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    button, html, input, md-bottom-sheet .md-subheader, select, textarea {
+      font-family: Roboto,"Helvetica Neue",sans-serif;
+    }
+    .page-content {
+      padding: 0.5rem;
+      padding-right: 800px;
+    }
+    .name {
+      font-family: "Lucida Grande", "Trebuchet MS", sans-serif;
+    }
+    .demo-wrapper {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      border-style: dashed;
+    }
+    .demo-show {
+      /*padding: 0.5rem;*/
+    }
+    .demo-code {
+      font-size: 75%;
+    }
+    .demo-code code {
+      word-break: break-all;
+      display: block;
+    }
+    .demo-code pre {
+      margin: 0;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex;
+    }
+    .demo-code .token.comment {
+      display: inline-block;
+    }
+    .toggle-source-btn svg {
+      vertical-align: middle;
+      transition: transform 0.2s ease-in-out;
+      -webkit-transition: transform 0.2s ease-in-out;
+    }
+    .toggle-source-btn svg.up {
+      transform: rotate(-180deg);
+    }
+    .subtitle {
+      color: #5F9EA0;
+      border-bottom: 1px solid #aaa;
+      padding: 0.4rem 0;
+      margin: 0.8rem 0 1.2rem;
+    }
+    .demo-header svg {
+      vertical-align: top;
+    }
+    .demo-header .description, .demo-header .author {
+      margin: 0.5rem 0;
+      font-size: 14px;
+      line-height: 16px;
+      color: #07A;
+    }
+    .demo-header .npm-tag {
+      min-height: 20px;
+      background-repeat: no-repeat;
+    }
+    .api-class-name {
+      margin-top: 1em;
+      margin-bottom: 16px;
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      color: rgba(0,0,0,.87);
+    }
+    .api-class-name a {
+      text-decoration: none;
+    }
+    .api-class-detail {
+      padding-left: 0.8rem;
+    }
+    .api-class-detail code {
+      padding: 2px 4px;
+      font-size: 90%;
+      color: #c7254e;
+      white-space: nowrap;
+      background-color: #f9f2f4;
+      border-radius: 4px;
+    }
+    .api-class-extend {
+      font-size: 14px;
+      line-height: 16px;
+    }
+    .api-class-extend code {
+      font-size: 14px;
+      line-height: 16px;
+    }
+    .api-detail h4{
+      margin: 1rem 0;
+    }
+    .api-detail h5 {
+      margin: 0.8rem 0;
+    }
+    .api-detail h6, .api-detail p {
+      margin: 0.4rem 0;
+    }
+    .api-detail p {
+      border-left: 2px solid #ccc;
+      padding-left: 4px;
+    }
+    .api-detail table {
+      border-collapse: collapse;
+      display: block;
+      width: 100%;
+      word-break: normal;
+      word-break: keep-all;
+      table-layout: fixed;
+    }
+    .api-detail table td, .api-detail table th {
+      padding: 6px 13px;
+      border: 1px solid #ddd;
+      border-top: 1px solid rgba(0,0,0,.06);
+      display: table-cell;
+      vertical-align: top;
+      border-left: 0 none;
+      border-right: 0 none;
+    }
+    .api-detail table tr {
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+    .api-detail table td {
+      color: #266d90;
+      font-size: 95%;
+    }
+    .api-detail table th {
+      border-bottom: 2px solid rgba(0,0,0,.06);
+      border-top: 0 none;
+      color: #888;
+      display: table-cell;
+      font-weight: 400;
+      text-align: left;
+    }
+    td.api-prop-name {
+      color: #266d90;
+    }
+    td.api-prop-type {
+      color: #bf2a5c;
+      font-family: Menlo,Monaco,Consolas,Courier New,monospace;
+      font-size: 90%;
+    }
+    td.api-prop-default {
+      color: #666;
+      font-family: Menlo,Monaco,Consolas,Courier New,monospace;
+    }
+    td.api-prop-desc {
+      color: rgba(51,51,51,.9);
+      font-family: Roboto,sans-serif;
+      font-size: 95%;
+      min-width: 250px;
+    }
+    .api-prop-required {
+      background: #c7254e;
+      border-radius: 4px;
+      padding: 2px;
+      color: #fff;
+      margin-left: 4px;
+      font-size: 80%;
+      vertical-align: text-top;
+    }
+    .api-error-tip {
+      color: #c7254e;
+    }
+    .api-prop-enum-list {
+      margin: 0.2rem;
+      font-size: 75%;
+      line-height: 1.5;
+    }
+    .api-prop-func-desc dl {
+      margin: 0.5rem 0;
+      font-size: 12px;
+      line-height: 14px;
+    }
+    .api-prop-func-desc dl dd, .api-prop-func-desc dl ul {
+      margin-left: 1rem;
+      padding-left: 0;
+    }
+    .api-prop-func-desc dt {
+      margin: 0.5rem 0;
+    }
+    .api-label {
+      font-family: RobotoDraft,Roboto,'Helvetica Neue',sans-serif;
+      color: #2E8B57;
+      font-weight:bold;
+    }
+    .device {
+      z-index: 1000;
+      position: absolute;
+      right: 1%;
+      /*margin-left: -240px;*/
+      top: 0;
+      margin-top: -10px;
+      padding: 80px 20px;
+    }
+    .device-inner {
+      width: 480px;
+      height: 640px;
+      border: 1px solid #ccc;
+      background: #666;
+      border-radius: 5px;
+      position: relative;
+      z-index: 1;
+    }
+    .device-inner iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+<!--动画转场包装器-->
+<div data-role="page">
+  <div id="tbh5v0" class="content">
+    <div id="bodyCont" class="screen-wrap fullscreen">
+      <div class="page-content" id="J_Page">
+
+        <section class="demo-header">
+          <h2 class="name">${name}</h2>
+          <p class="description">
+          <div class="npm-tag" style="background-image: url(http://web.npm.alibaba-inc.com/badge/v/${name}.svg?style=flat-square);"></div>
+          </p>
+          <!--<p class="description">-->
+          <!--<svg fill="#29b6f6" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">-->
+          <!--<path d="M0 0h24v24H0z" fill="none"/>-->
+          <!--<path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/>-->
+          <!--</svg>-->
+          <!--${version}-->
+          <!--</p>-->
+          <p class="description">
+            <svg fill="#29b6f6" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0z" fill="none"/>
+              <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+            </svg>
+            ${description}
+          </p>
+          <p class="author">
+            <svg fill="#29b6f6" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+            {@if typeof author === 'string'}
+            ${author}
+            {@else if typeof author === 'object'}
+            ${author.name}&lt;${author.email.replace(/[<\>]/g, '')}&gt;
+            {@/if}
+            </label>
+        </section>
+
+        <section class="demo-container">
+          <h3 class="subtitle">示例代码</h3>
+          <div class="demo-wrapper">
+            <div class="demo-show">
+              <div class="device">
+                <div class="device-inner" style="width: 750px; height: 568px;">
+                  <iframe frameborder="no" scrolling="yes" seamless src="${demoUrl}"></iframe>
+                </div>
+              </div>
+            </div>
+            <section class="demo-code">
+              <pre>
+                <code class="language-jsx">$${sourceCode}</code>
+              </pre>
+            </section>
+          </div>
+
+        </section>
+
+        <section class="demo-api">
+          <h3 class="subtitle">API</h3>
+          <div class="api-detail">
+            {@each apiDetailArr as apiDetailItem}
+            <section class="api-detail-item">
+              <h4 class="api-class-name">
+                <a name="api-${apiDetailItem.name}" href="#api-${apiDetailItem.name}"># <code>&lt;${apiDetailItem.name}&gt;</code> Properties</a>
+              </h4>
+              <div class="api-class-detail">
+                <table>
+                  <thead>
+                  <tr>
+                    <th class="api-prop-name">参数名</th>
+                    <th class="api-prop-type">类型</th>
+                    <th class="api-prop-default">默认值</th>
+                    <th class="api-prop-desc">说明</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {@each apiDetailItem.props as apiPropItem}
+                  <tr>
+                    <td class="api-prop-name">
+                      ${apiPropItem.name}
+                      {@if apiPropItem.required}<label class="api-prop-required">required</label>{@/if}
+                    </td>
+                    <td class="api-prop-type">
+                      {@if apiPropItem.type && apiPropItem.type.name}
+                      ${apiPropItem.type.name}
+                      {@if apiPropItem.type.value && apiPropItem.type.value.name}
+                      :
+                      <ul class="api-prop-enum-list">
+                        <li>${apiPropItem.type.value.name}</li>
+                      </ul>
+                      {@/if}
+                      {@if apiPropItem.type.raw}
+                      :
+                      <ul class="api-prop-enum-list">
+                        <li>${apiPropItem.type.raw}</li>
+                      </ul>
+                      {@/if}
+                      {@if apiPropItem.type.name === 'enum' && apiPropItem.type.value.length > 0}
+                      :
+                      <ul class="api-prop-enum-list">
+                        {@each apiPropItem.type.value as enumItem}
+                        <li>${enumItem.value}</li>
+                        {@/each}
+                      </ul>
+                      {@/if}
+                      {@if apiPropItem.type.name === 'union' && apiPropItem.type.value.length > 0}
+                      :
+                      <ul class="api-prop-enum-list">
+                        {@each apiPropItem.type.value as enumItem}
+                        <li>
+                          ${enumItem.name}{@if enumItem.value} ${enumItem.value}{@/if}
+                        </li>
+                        {@/each}
+                      </ul>
+                      {@/if}
+                      {@if apiPropItem.type.name === 'shape' && Object.keys(apiPropItem.type.value).length > 0}
+                      :
+                      <ul class="api-prop-enum-list">
+                        {@each Object.keys(apiPropItem.type.value) as shapeKey}
+                        <li>
+                          ${shapeKey}: ${apiPropItem.type.value[shapeKey].name}
+                          {@if apiPropItem.type.value[shapeKey].name.required}<label class="api-prop-required">required</label>{@/if}
+                        </li>
+                        {@/each}
+                      </ul>
+                      {@/if}
+                      {@else}
+                      <label class="api-error-tip">${apiPropItem | missingPropTypeTip, apiDetailItem}</label>
+                      {@/if}
+                    </td>
+                    <td class="api-prop-default">
+                      {@if apiPropItem.defaultValue}
+                      <code>${apiPropItem.defaultValue.value}</code>
+                      {@/if}
+                    </td>
+                    <td class="api-prop-desc">
+                      ${apiPropItem.docBlock.description}
+                      {@if apiPropItem.type && apiPropItem.type.name == 'func'}
+                      <div class="api-prop-func-desc">
+                        <dl>
+                          <dt><label class="api-label">函数签名:</label></dt>
+                          <dd>
+                            <code>
+                              function(${apiPropItem.docBlock.tags | funcParams}) => ${apiPropItem.docBlock.tags | funcReturn}
+                            </code>
+                            <ul>
+                              {@each apiPropItem.docBlock.tags as tagItem}
+                              {@if tagItem.title == 'param'}
+                              <li>
+                                <code class="api-prop-func-param">${tagItem.name}</code>
+                                :
+                                ${tagItem.description}
+                              </li>
+                              {@/if}
+                              {@/each}
+                            </ul>
+                          </dd>
+                        </dl>
+                      </div>
+                      {@/if}
+                    </td>
+                  </tr>
+                  {@/each}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            {@/each}
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="//g.alicdn.com/sj/lib/zepto/zepto.min.js"></script>
+<script src="//h5.m.taobao.com/js/trip/libs/prism.js" data-manual></script>
+<script type="text/json" id="J_ApiMeta">$${apiDetailArr|json}</script>
+<script>
+  Prism.highlightAll();
+</script>
+</body>
+</html>
