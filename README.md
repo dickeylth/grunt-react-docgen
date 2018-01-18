@@ -70,6 +70,13 @@ grunt.initConfig({
 
 输出文档 HTML 文件路径。
 
+#### options.deviceType
+
+- Type: `String`
+- Default value: `'h5'`
+
+选择'pc'或者'h5'两种文档模板。
+
 ## 版本历史
 
 - [0.1.0]
@@ -90,6 +97,8 @@ grunt.initConfig({
   - Catch error for `reactDocgen.parse`
 - [0.2.7]
   - fix doc html style
+- [0.3.5]
+  - 加入新的适用于pc组件的文档模板
 
 ## License
 Copyright (c) 2015 dickeylth. Licensed under the MIT license.
