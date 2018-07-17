@@ -14,7 +14,7 @@ var _ = require('lodash')
 var fs = require('fs');
 var path = require('path');
 
-const DOC_TPL_SOURCE = fs.readFileSync(path.join(__dirname, './doc.html'), 'utf-8');
+const DOC_TPL_PATH = path.join(__dirname, './doc.html');
 
 /**
  * 生成源码
@@ -143,6 +143,7 @@ module.exports = function (grunt) {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
+      templateFilePath: DOC_TPL_PATH,
       entryFiles: ['index.jsx'],
       pkgInfo: require(path.join(process.cwd(), 'package.json')),
       demoEntryJSX: 'demo/index.jsx',
@@ -160,7 +161,8 @@ module.exports = function (grunt) {
         grunt.log.warn('Source file "' + filepath + '" not found.');
       } else {
         var src = grunt.file.read(filepath);
-        if (src.indexOf('"react"') == -1) {
+        if ((src.indexOf('"react"') == -1) &&
+          (src.indexOf("'react'") == -1)) {
           // hack for indirect react import, so that react-docgen could recognize it as react module.
           src = ';import React from "react";' + src;
         }
@@ -230,7 +232,9 @@ module.exports = function (grunt) {
 
     grunt.verbose.writeln(JSON.stringify(fileDocMetaArr, null, 2));
 
-    grunt.file.write(options.outputFilePath, Juicer(DOC_TPL_SOURCE, {
+    const docTplSource = fs.readFileSync(options.templateFilePath, 'utf-8');
+
+    grunt.file.write(options.outputFilePath, Juicer(docTplSource, {
       name: pkgInfo.name,
       description: pkgInfo.description,
       version: pkgInfo.version,

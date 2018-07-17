@@ -1,6 +1,6 @@
 {
   "name": "grunt-react-docgen",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Grunt plugin based on react-docgen and doctrine for react component doc json generate",
   "homepage": "https://github.com/dickeylth/grunt-react-docgen",
   "repository": {
@@ -23,15 +23,15 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
-    "load-grunt-tasks": "~0.3.0"
+    "load-grunt-tasks": "^3.5.2"
   },
   "scripts": {
     "test": "grunt test"
   },
   "dependencies": {
-    "doctrine": "^2.0.0",
-    "juicer": "^0.6.14",
-    "lodash": "^4.17.4",
-    "react-docgen": "^2.15.0"
+    "doctrine": "^2.1.0",
+    "juicer": "^0.6.15",
+    "lodash": "^4.17.5",
+    "react-docgen": "^2.20.1"
   }
 }

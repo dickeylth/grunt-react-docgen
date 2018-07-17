@@ -70,6 +70,13 @@ grunt.initConfig({
 
 输出文档 HTML 文件路径。
 
+### options.templateFilePath
+
+- Type: `String`
+- Default value: `tasks/doc.html`
+
+文档模板文件路径，默认为内置模板路径。
+
 ## 版本历史
 
 - [0.1.0]
@@ -90,6 +97,8 @@ grunt.initConfig({
   - Catch error for `reactDocgen.parse`
 - [0.2.7]
   - fix doc html style
+- [0.3.5]
+  - 新增 `options.templateFilePath` 指定文档模板路径。
 
 ## License
 Copyright (c) 2015 dickeylth. Licensed under the MIT license.
