@@ -237,8 +237,8 @@ module.exports = function (grunt) {
         tplSource = fs.readFileSync(options.templateFilePath, 'utf-8');
       }
     } catch (e) {
-      grunt.log.writeln('"templateFilePath" is being set while it is invalid. Check your templateFilePath value to ensure the path is correct'.red);
-      grunt.log.error(e);
+      grunt.log.warn('"templateFilePath" is being set but it is invalid. Checkout your templateFilePath value to ensure the path is correct'.yellow);
+      grunt.log.warn('grunt-react-docgen will use default template to bulid'.yellow);
       tplSource = '';
     }
     
