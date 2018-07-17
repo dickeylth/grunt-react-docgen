@@ -230,7 +230,19 @@ module.exports = function (grunt) {
 
     grunt.verbose.writeln(JSON.stringify(fileDocMetaArr, null, 2));
 
-    grunt.file.write(options.outputFilePath, Juicer(DOC_TPL_SOURCE, {
+    // Use templateFilePath to change default jucier template path when templateFilePath is valid.
+    var tplSource = '';
+    try {
+      if (options.templateFilePath) {
+        tplSource = fs.readFileSync(options.templateFilePath, 'utf-8');
+      }
+    } catch (e) {
+      grunt.log.writeln('"templateFilePath" is being set while it is invalid. Check your templateFilePath value to ensure the path is correct'.red);
+      grunt.log.error(e);
+      tplSource = '';
+    }
+    
+    grunt.file.write(options.outputFilePath, Juicer((tplSource || DOC_TPL_SOURCE), {
       name: pkgInfo.name,
       description: pkgInfo.description,
       version: pkgInfo.version,
