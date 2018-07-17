@@ -70,6 +70,13 @@ grunt.initConfig({
 
 输出文档 HTML 文件路径。
 
+#### options.templateFilePath
+
+- Typs: `String`
+- Default value: `''`
+
+文档模板地址，如果为空字符串，则使用grunt-react-docgen默认的地址（默认模板插件自行维护）
+
 ## 版本历史
 
 - [0.1.0]
